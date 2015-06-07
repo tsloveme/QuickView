@@ -5,7 +5,7 @@ header('Content-type:text/json;charset=utf-8');
 }*/
 
 $ds = DIRECTORY_SEPARATOR;
-$storeFolder = 'Tem';
+$storeFolder = 'upload';
 if (!empty($_FILES)) {
     $tempFile = $_FILES['file']['tmp_name'];
     //$tempFile = iconv('UTF-8','GBK',$tempFile);
@@ -19,5 +19,6 @@ if (!empty($_FILES)) {
      
 }
 //var_dump($targetFile);
+//var_dump($_SERVER);
 var_dump($_POST);
 ?> 

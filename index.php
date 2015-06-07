@@ -24,6 +24,7 @@
 <form action="upload.php" class="dropzone" id="my-awesome-dropzone" name="form" enctype='multipart/form-data'>
     <input type="hidden" id="projectName_hidden" name="name" value=""/>
     <input type="hidden" id="type_hidden" name="webtype" value=""/>
+	<input type="hidden" id="folder" name="folder" value="" />
 </form>
 <div style="margin:12px auto 0 auto; width: 320px padding: 10px;">
     <table cellspacing="5" cellpadding="8" width="100%">
@@ -45,6 +46,23 @@
 
 </div>
 <script>
+	/*
+	*目录生成函数
+	*年月日 + 项目名 + timestamp;
+	*
+	*/
+	function makeFolder(){
+		var date = new Date;
+		var y = (date.getFullYear() + '').substring(2);
+		//y = y < 10 ? '0'+y : y;
+		var m = date.getMonth()+1;
+		m = m < 10 ? '0'+m : m;
+		var d = date.getDate();
+		d = d < 10 ? '0'+d : d;
+		var timestamp = date.getTime();
+		var type = $('#type_hidden').val();
+		$('#folder').val(y + m + d + type + '_' + $("#projectName_hidden").val() + '_' + timestamp);
+	}
     $("#projectName").blur(function(){
         $("#projectName_hidden").val($.trim($(this).val()));
     });
@@ -85,6 +103,8 @@
         flag = flag && $.trim($("#projectName").val());
         flag = flag && ($('input[name="type"]').eq(0).is(':checked')||$('input[name="type"]').eq(1).is(':checked'));
         if (flag){
+			$('#projectName,input[name="type"]').attr('disabled','disabled');
+			makeFolder();
             console.log('ok');
             myDropzone.processQueue();
         }
