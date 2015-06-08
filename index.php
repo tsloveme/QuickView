@@ -39,7 +39,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><input class="btnSubmit" type="submit" value="确认上传" /></td>
+            <td><input class="btnSubmit" type="submit" value="确认上传"  autocomplete="off" /></td>
         </tr>
     </table>
     <br/>

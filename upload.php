@@ -17,12 +17,14 @@ if (!is_dir($targetPath)){
         copy(dirname( __FILE__ ) . $ds. 'template' . $ds.$templateName, $targetPath . $ds .'index.php');
     }
 }
+var_dump($_FILES);
 if (!empty($_FILES)) {
     $tempFile = $_FILES['file']['tmp_name'];
     //$tempFile = iconv('UTF-8','GBK',$tempFile);
     $targetFile =  $targetPath. iconv('utf-8', 'GBK', $_FILES['file']['name']);;
     //var_dump($targetFile);
     //$targetFile = iconv('utf-8', 'GBK', $targetFile);
+	var_dump($tempFile);
     var_dump($targetFile);
     move_uploaded_file($tempFile,$targetFile);
 

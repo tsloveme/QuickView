@@ -61,6 +61,7 @@ body{padding-bottom:40px;}
 <script>
 function adaptHeight(obj){
 	obj.parentNode.style.height=obj.clientHeight+"px";
+	obj.style.left=-(obj.width)/2 +"px";
 }
 </script>
 </head>
@@ -101,7 +102,7 @@ function adaptHeight(obj){
     	<a href="#">1b网页图（集团介绍）</a>-->
     </div>
 </div>
-<script language="javascript" type="text/javascript" src="../public/jquery-1.8.3.min.js"></script>
+<script language="javascript" type="text/javascript" src="../../public/jquery-1.8.3.min.js"></script>
 <script language="javascript" type="text/javascript">
 $(function(){
 
