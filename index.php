@@ -89,14 +89,18 @@
         thumbnailWidth:320,
         thumbnailHeight:480,
         success:function(data){
-            console.log('success!');
-            console.log(data);
+           // console.log('success!');
+            //console.log(data);
+
         },
         complete:function(data){
             console.log('complete!');
-            console.log(data);
-        }
+            //console.log(data);
+            myDropzone.processQueue();
+        },
+        queuecomplete: function(){
 
+        }
     });
     $(".btnSubmit").click(function(){
         var flag = true;
@@ -104,6 +108,7 @@
         flag = flag && ($('input[name="type"]').eq(0).is(':checked')||$('input[name="type"]').eq(1).is(':checked'));
         if (flag){
 			$('#projectName,input[name="type"]').attr('disabled','disabled');
+            $(this).attr('disabled','disabled');
 			makeFolder();
             console.log('ok');
             myDropzone.processQueue();

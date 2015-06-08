@@ -101,7 +101,7 @@ function adaptHeight(obj){
     	<a href="#">1b网页图（集团介绍）</a>-->
     </div>
 </div>
-<script language="javascript" type="text/javascript" src="../../public/jquery-1.8.3.min.js"></script>
+<script language="javascript" type="text/javascript" src="../public/jquery-1.8.3.min.js"></script>
 <script language="javascript" type="text/javascript">
 $(function(){
 
