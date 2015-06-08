@@ -10,7 +10,7 @@
 	$imgArr = array();
 	foreach($list as $k => $v){
 		if(is_file($dir.'\\'.$v)){
-			if(preg_match('/(jpg)|(jpeg)|(png)|(gif)/i',get_file_type($v)) && !preg_match('/quick_mark_adress/i',$v)){
+			if(preg_match('/(jpg)|(jpeg)|(png)|(gif)/i',get_file_type($v)) && !preg_match('/quick_mark_address/i',$v)){
 				array_push($imgArr,iconv('GBK', 'utf-8', $v));	
 			}
 		}
@@ -37,9 +37,9 @@
 <meta name="x5-orientation" content="portrait"/>
 <meta name="x5-fullscreen" content="true"/>
 <meta name="x5-page-mode" content="app"/>
-<script src="../../public/jquery-1.8.3.min.js"></script>
-<script src="../../public/jquery.event.drag-1.5.min.js"></script>
-<script src="../../public/jquery.touchSlider.js"></script>
+<script src="../public/jquery-1.8.3.min.js"></script>
+<script src="../public/jquery.event.drag-1.5.min.js"></script>
+<script src="../public/jquery.touchSlider.js"></script>
 <script>
 /*判断是否手机浏览器*/
 function isMobile() {
@@ -143,7 +143,7 @@ $(function(){
 								</div>\
 								<div class="clear"></div>\
 								<h2>手机扫描二维码全屏访问</h2>\
-								<div><img src="quick_mark_adress.jpg" /></div>\
+								<div><img src="quick_mark_address.png" /></div>\
 							</div>\
 						</div>');
 		<?php
@@ -191,9 +191,9 @@ ol{}
 /*初始化*/
 header,footer,.main{margin:0 auto; max-width:480px;}
 header{display:block;width:100%; vertical-align:top;}
-body{max-width:480px; margin:0 auto; height:100%;}
+body{max-width:480px; margin:0 auto; height:100%; background-color:#000;}
 /* main_image */
-.main_visual{border-top:1px solid #d7d7d7;overflow:hidden;position:relative;}
+.main_visual{overflow:hidden;position:relative;}
 .main_image{height:422px;overflow:hidden;position:relative;}
 .main_image ul{width:9999px;overflow:hidden;position:absolute;top:0;left:0}
 .main_image li{float:left;width:100%;}
@@ -201,13 +201,13 @@ body{max-width:480px; margin:0 auto; height:100%;}
 .main_image li span{display:block;width:100%;background-position:center top; background-size:100% auto; background-repeat:no-repeat}
 .main_image li img{width:100%;}
 div.flicking_con{position:fixed; width:100%; max-width:480px;bottom:.5em;left:auto;z-index:999; text-align:center;}
-div.flicking_con a{width:1em;height:1em;margin:0;padding:0;background:url('../../public/btn_main_img.png') 0 0 no-repeat;display:inline-block;text-indent:-999em; background-size:100% auto; overflow:hidden;}
+div.flicking_con a{width:1em;height:1em;margin:0;padding:0;background:url('../public/btn_main_img.png') 0 0 no-repeat;display:inline-block;text-indent:-999em; background-size:100% auto; overflow:hidden;}
 div.flicking_con a.on{background-position:0 -1em}
 #btn_prev,#btn_next{z-index:11111;position:absolute;display:block;top:50%;margin-top:-37px;display:none;}
 #btn_prev{left:100px;}
 #btn_next{right:100px;}
 .pc_page{padding-left:55%;}
-.pc_pannel{width:55%; height:100%; overflow-y:scroll; position:fixed; left:0; top:0;}
+.pc_pannel{width:55%; height:100%; overflow-y:scroll; position:fixed; left:0; top:0; background-color:#fff}
 .pc_pannel .inner{margin:0 5px; padding:5px 0;}
 .pc_pannel h2{font-size:18px; color:#333; line-height:1.75; padding-top:15px;}
 .pc_pannel table{border-collapse:collapse;}
@@ -216,7 +216,7 @@ div.flicking_con a.on{background-position:0 -1em}
 .pc_pannel .a_wrap a:link{color:#666; float:left; width:21%; margin:0 2% 8px  0; }
 .pc_pannel .a_wrap a:hover{color:#fff; background-color:orange; text-decoration:none}
 .pc_pannel .a_wrap a.selected{background-color:orange;border:1px #ff6000 solid; color:white}
-
+div.flicking_con{background-color:rgba(255, 255, 255, 0.25); padding-top:.5em;}
 
 
 </style>
