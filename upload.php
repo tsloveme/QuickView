@@ -25,7 +25,8 @@ if(!is_file($targetPath.'quick_mark_address.png') && $_POST['webtype']=='mobile'
     $path = $_SERVER['REQUEST_URI'];    // /QuickView/upload.php
     preg_match_all('/(^\/.*\/)/',$path,$match);
     $path =$match[1][0];
-    $url = $host . $path .$targetPath.'quick_mark_address.png';
+    $url = 'http://'. $host . $path .$_POST['folder'].$ds.'index.php';
+	//$url = urlencode($url);
     QRcode::png($url, $targetPath.'quick_mark_address.png', QR_ECLEVEL_M, 6);
 }
 var_dump($_FILES);

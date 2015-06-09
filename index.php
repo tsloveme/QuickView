@@ -61,9 +61,16 @@
 		m = m < 10 ? '0'+m : m;
 		var d = date.getDate();
 		d = d < 10 ? '0'+d : d;
-		var timestamp = date.getTime();
+		var h = date.getHours();
+		h = h < 10 ? '0'+h : h;
+		var min = date.getMinutes();
+		min = min < 10 ? '0'+min : min;
+		var s = date.getSeconds();
+		s = s < 10 ? '0'+s : s;
 		var type = $('#type_hidden').val();
-		$('#folder').val(y + m + d + type + '_' + $("#projectName_hidden").val() + '_' + timestamp);
+		var timestamp = date.getTime();		
+		//$('#folder').val(y + m + d + type + '_' + $("#projectName_hidden").val() + '_' + timestamp);
+		$('#folder').val(y + m + d + type + '_' + $("#projectName_hidden").val() + '_' + h + '-' + min + '-'+s);
 	}
     $("#projectName").blur(function(){
         $("#projectName_hidden").val($.trim($(this).val()));
