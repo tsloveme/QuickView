@@ -39,7 +39,9 @@
         </tr>
         <tr>
             <td></td>
-            <td><input class="btnSubmit" type="submit" value="确认上传"  autocomplete="off" /></td>
+            <td><input class="btnSubmit" type="submit" value="确认上传"  autocomplete="off" />
+            <a href="upload/" target="_blank" >查看已上传项目</a>
+            </td>
         </tr>
     </table>
     <br/>

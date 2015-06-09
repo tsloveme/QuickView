@@ -37,9 +37,9 @@
 <meta name="x5-orientation" content="portrait"/>
 <meta name="x5-fullscreen" content="true"/>
 <meta name="x5-page-mode" content="app"/>
-<script src="../public/jquery-1.8.3.min.js"></script>
-<script src="../public/jquery.event.drag-1.5.min.js"></script>
-<script src="../public/jquery.touchSlider.js"></script>
+<script src="../../public/jquery-1.8.3.min.js"></script>
+<script src="../../public/jquery.event.drag-1.5.min.js"></script>
+<script src="../../public/jquery.touchSlider.js"></script>
 <script>
 /*判断是否手机浏览器*/
 function isMobile() {
