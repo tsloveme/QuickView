@@ -72,7 +72,7 @@
 		var type = $('#type_hidden').val();
 		var timestamp = date.getTime();		
 		//$('#folder').val(y + m + d + type + '_' + $("#projectName_hidden").val() + '_' + timestamp);
-		$('#folder').val(y + m + d + type + '_' + $("#projectName_hidden").val() + '_' + h + '时' + min + '分'+s+'秒');
+		$('#folder').val(y + m + d + type + '_' + $("#projectName_hidden").val() + '_' + h + min + + s);
 	}
     $("#projectName").blur(function(){
         $("#projectName_hidden").val($.trim($(this).val()));
