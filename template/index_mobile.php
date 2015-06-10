@@ -26,6 +26,8 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -200,8 +202,8 @@ body{max-width:480px; margin:0 auto; height:100%; background-color:#000;}
 .main_image li a{display:block;width:100%;height:422px}
 .main_image li span{display:block;width:100%;background-position:center top; background-size:100% auto; background-repeat:no-repeat}
 .main_image li img{width:100%;}
-div.flicking_con{position:fixed; width:100%; max-width:480px;bottom:.5em;left:auto;z-index:999; text-align:center;}
-div.flicking_con a{width:1em;height:1em;margin:0;padding:0;background:url('../public/btn_main_img.png') 0 0 no-repeat;display:inline-block;text-indent:-999em; background-size:100% auto; overflow:hidden;}
+div.flicking_con{position:fixed; width:100%; max-width:480px;bottom:0;left:auto;z-index:999; text-align:center;}
+div.flicking_con a{width:1em;height:1em;margin:0;padding:0;background:url('../../public/btn_main_img.png') 0 0 no-repeat;display:inline-block;text-indent:-999em; background-size:100% auto; overflow:hidden;}
 div.flicking_con a.on{background-position:0 -1em}
 #btn_prev,#btn_next{z-index:11111;position:absolute;display:block;top:50%;margin-top:-37px;display:none;}
 #btn_prev{left:100px;}
@@ -216,7 +218,7 @@ div.flicking_con a.on{background-position:0 -1em}
 .pc_pannel .a_wrap a:link{color:#666; float:left; width:21%; margin:0 2% 8px  0; }
 .pc_pannel .a_wrap a:hover{color:#fff; background-color:orange; text-decoration:none}
 .pc_pannel .a_wrap a.selected{background-color:orange;border:1px #ff6000 solid; color:white}
-div.flicking_con{background-color:rgba(255, 255, 255, 0.25); padding-top:.5em;}
+div.flicking_con{background-color:rgba(255, 255, 255, 0.25);-wekit-background-color:rgba(255, 255, 255, 0.25); padding-top:.5em;}
 
 
 </style>

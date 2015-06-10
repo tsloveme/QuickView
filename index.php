@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <title>效果图上传预览</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="renderer" content="webkit">
 <link rel="stylesheet" type="text/css" href="public/basic.css" />
 <link rel="stylesheet" type="text/css" href="public/dropzone.css" />
 <script language="javascript" type="text/javascript" src="public/jquery-1.8.3.min.js"></script>
@@ -12,12 +14,12 @@
     input,body{font-size:16px; font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;}
     .dropzone.dz-clickable{border: 2px #999 dashed;}
     .dropzone.dz-clickable:hover{opacity: 0.65}
-    .dropzone .dz-preview .dz-image { border-radius: 8px; display: block; width: 320px; height:480px; z-index: 10; }
-    .dropzone .dz-preview{width: 320px;}
+    .dropzone .dz-preview .dz-image { border-radius: 8px; display: block; width: 240px; height:400px; z-index: 10; }
+    .dropzone .dz-preview{width: 240px;}
     .btnSubmit{border-radius: 3px; border: 1px #0266c4 solid; background-color:#017bed ;color:white; font-size: 16px; min-width: 100px; height: 31px;}
     table{border-collapse: collapse;}
     td{border:1px #e0e0e0 solid;}
-    input[type="text"].txt{height:20px; line-height: 20px; padding: 3px; width: 240px;}
+    input[type="text"].txt{height:20px; line-height: 20px; padding: 3px; width: 320px;}
 </style>
 </head>
 <body>
@@ -30,7 +32,7 @@
     <table cellspacing="5" cellpadding="8" width="100%">
         <tr>
             <td align="right">项目名：</td>
-            <td> <input id="projectName" type="text" value="" class="txt" placeholder="请输入项目名，可输入中文" autocomplete="off" ></td>
+            <td> <input id="projectName" type="text" value="" class="txt" placeholder="请输入项目名(写个中文名吧方便理解)" autocomplete="off" ></td>
         </tr>
         <tr>
             <td align="right">类 型：</td>
@@ -45,8 +47,8 @@
         </tr>
     </table>
     <br/>
-
 </div>
+<a id="newLink" href="" target="_blank" style="visibility: hidden">link to new object</a>
 <script>
 	/*
 	*目录生成函数
@@ -70,7 +72,7 @@
 		var type = $('#type_hidden').val();
 		var timestamp = date.getTime();		
 		//$('#folder').val(y + m + d + type + '_' + $("#projectName_hidden").val() + '_' + timestamp);
-		$('#folder').val(y + m + d + type + '_' + $("#projectName_hidden").val() + '_' + h + '-' + min + '-'+s);
+		$('#folder').val(y + m + d + type + '_' + $("#projectName_hidden").val() + '_' + h + '时' + min + '分'+s+'秒');
 	}
     $("#projectName").blur(function(){
         $("#projectName_hidden").val($.trim($(this).val()));
@@ -84,6 +86,7 @@
     var myDropzone = new Dropzone("#my-awesome-dropzone", {
         // url: "/file/post"
         url:'upload.php',
+        parallelUploads:1,
         autoProcessQueue:false,
 //        drop:function(){
 //            if(is_check){
@@ -94,9 +97,9 @@
 //            }
 //
 //        },
-        dictDefaultMessage: "支持拖拽上传！",
-        thumbnailWidth:320,
-        thumbnailHeight:480,
+        dictDefaultMessage: "支持多个图片拖拽上传！APP建议:640, PC建议:1920",
+        thumbnailWidth:240,
+        thumbnailHeight:400,
         success:function(data){
            // console.log('success!');
             //console.log(data);
@@ -108,13 +111,24 @@
             myDropzone.processQueue();
         },
         queuecomplete: function(){
+            console.log("queuecomplete!");
+            //触发新项目链接
+            $('#newLink').click();
 
         }
     });
     $(".btnSubmit").click(function(){
         var flag = true;
         flag = flag && $.trim($("#projectName").val());
+        if(!flag){
+            alert('项目名必填！');
+            return;
+        }
         flag = flag && ($('input[name="type"]').eq(0).is(':checked')||$('input[name="type"]').eq(1).is(':checked'));
+        if(!flag){
+            alert('项目类型必选！');
+            return;
+        }
         if (flag){
 			$('#projectName,input[name="type"]').attr('disabled','disabled');
             $(this).attr('disabled','disabled');
@@ -122,6 +136,13 @@
             console.log('ok');
             myDropzone.processQueue();
         }
+        //添加新项目链接
+        var url = window.location.href;
+        url = url.replace(/[^\/]*$/,'');
+        url += 'upload/';
+        url += $('#folder').val();
+        url = encodeURI(url);
+        $('#newLink').attr('href',url);
     });
 </script>
 

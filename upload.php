@@ -24,8 +24,9 @@ if(!is_file($targetPath.'quick_mark_address.png') && $_POST['webtype']=='mobile'
     $host = $_SERVER['HTTP_HOST'];      //10.8.25.25:8080
     $path = $_SERVER['REQUEST_URI'];    // /QuickView/upload.php
     preg_match_all('/(^\/.*\/)/',$path,$match);
-    $path =$match[1][0];
-    $url = 'http://'. $host . $path .$_POST['folder'].$ds.'index.php';
+    $path =$match[1][0].$baseDir.'/';
+    $url = 'http://'. $host . $path .$_POST['folder'].'/'.'index.php';
+    var_dump($url);
 	//$url = urlencode($url);
     QRcode::png($url, $targetPath.'quick_mark_address.png', QR_ECLEVEL_M, 6);
 }
@@ -36,8 +37,8 @@ if (!empty($_FILES)) {
     $targetFile =  $targetPath. iconv('utf-8', 'GBK', $_FILES['file']['name']);;
     //var_dump($targetFile);
     //$targetFile = iconv('utf-8', 'GBK', $targetFile);
-	var_dump($tempFile);
-    var_dump($targetFile);
+	//var_dump($tempFile);
+   // var_dump($targetFile);
     move_uploaded_file($tempFile,$targetFile);
 
 }
