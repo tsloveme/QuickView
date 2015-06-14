@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['username']) || $_SESSION['username']!='admin'){
+	$url = $_SERVER['PHP_SELF'];
+	header('Location:login.php?from='.$url);
+    exit();
+}
+var_dump($_SESSION);
+?>
 <!doctype html>
 <html>
 <head>
@@ -20,6 +29,7 @@
     table{border-collapse: collapse;}
     td{border:1px #e0e0e0 solid;}
     input[type="text"].txt{height:20px; line-height: 20px; padding: 3px; width: 320px;}
+	#logout{position:fixed; right:5px;bottom:5px; text-align:right;}
 </style>
 </head>
 <body>
@@ -42,7 +52,7 @@
         <tr>
             <td></td>
             <td><input class="btnSubmit" type="submit" value="确认上传"  autocomplete="off" />
-            <a href="upload/" target="_blank" >查看已上传项目</a>
+            <a href="list.php" target="_blank" >查看已上传项目</a>
             </td>
         </tr>
     </table>
@@ -145,6 +155,16 @@
         $('#newLink').attr('href',url);
     });
 </script>
+<?php 
+if(isset($_SESSION['username'])){
+?>
+<div id="logout">
+<span><?php echo $_SESSION['username']; ?>,你好! </span>
+<a href="login.php?logout=1">注销</a>
+</div>
 
+<?php
+}
+?>
 </body>
 </html>

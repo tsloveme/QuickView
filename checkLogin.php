@@ -1,10 +1,3 @@
-<?php
-$from = '';
-if(isset($_GET['from']) && !empty($_GET['from'])){
-	$from = $_GET['from'];
-}
-
-?>
 <!doctype html>
 <html>
 <head>
@@ -18,7 +11,7 @@ input[type="submit"]{border-radius: 3px; border: 1px #0266c4 solid; background-c
 
 </style>
 <body>
-<form action="login.php?from=<?php echo $from; ?>" method="post" name="form1">
+<form action="login.php" method="post" name="form1">
 <table width="600" border="1" align="center" cellspacing="0" cellpadding="5" style="border-collapse:collapse">
   <tr>
     <td colspan="2" align="center"><h1>用户登录</h1></td>
@@ -54,26 +47,15 @@ input[type="submit"]{border-radius: 3px; border: 1px #0266c4 solid; background-c
 </body>
 </html>
 <?php
-if(isset($_GET['logout']) && $_GET['logout']=='1'){
-	session_start();
-	unset($_SESSION['username']);
-}
 if(!isset($_POST) || empty($_POST)){
 	exit;
 }
 $username = preg_replace('/(^\s+)|(\s+$)/','',$_REQUEST['username']);
 $password = preg_replace('/(^\s+)|(\s+$)/','',$_REQUEST['password']);
 if(($username === 'admin') && ($password === 'admin888')){
-	//session_set_cookie_params($lifeTime);
 	session_start();
 	$_SESSION['username'] =$username;
-	//echo '<script>alert("登录成功！")</script>';
-	if($from!=''){
-		header('Location:'.$from);
-	}
-	else{
-		header('Location:index.php');
-	}
+	echo '<script>alert("登录成功！")</script>';
 }
 else{
 	echo '<script>alert("用户名或者密码错误！")</script>';

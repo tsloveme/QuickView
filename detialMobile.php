@@ -1,12 +1,15 @@
 <?php
+header('Content-type:text/html;charset=utf-8');
     if(!isset($_REQUEST['projectName']) || empty($_REQUEST['projectName'])){
         echo '无效参数';
         exit;
     }
     $projectNameOrigin = $_REQUEST['projectName'];
-    $absDirUtf8 = 'upload/'.$projectNameOrigin.'/';
+	$confirm = $_REQUEST['confirm'];
+	$dirType = $confirm == '1' ? 'confirm' : 'test';
+    $absDirUtf8 = 'upload/'.$dirType.'/'.$projectNameOrigin.'/';
     $projectName = iconv('utf-8','gbk', $projectNameOrigin);
-    $absDir = 'upload/'.$projectName.'/';
+    $absDir = 'upload/'.$dirType.'/'.$projectName.'/';
     if(!is_dir($absDir)){
         echo '无效参数';
         exit;
@@ -18,7 +21,7 @@
 		return $type; 
 	}
 	$dir = getcwd();
-    $dir = $dir.'\\upload\\'.$projectName;
+    $dir = $dir.'\\upload\\'.$dirType.'\\'.$projectName;
 	$list = scandir($dir);
 	$imgArr = array();
 	foreach($list as $k => $v){
@@ -55,6 +58,7 @@
 <script src="public/jquery-1.8.3.min.js"></script>
 <script src="public/jquery.event.drag-1.5.min.js"></script>
 <script src="public/jquery.touchSlider.js"></script>
+<script src='public/dragscroll.js'></script>
 <script>
 /*判断是否手机浏览器*/
 function isMobile() {
@@ -158,7 +162,7 @@ $(function(){
 								</div>\
 								<div class="clear"></div>\
 								<h2>手机扫描二维码全屏访问</h2>\
-								<div><img src="<?php echo $absDirUtf8.'/' ?>quick_mark_address.png" /></div>\
+								<div><img src="<?php echo $absDirUtf8 ?>quick_mark_address.png" /></div>\
 							</div>\
 						</div>');
 		<?php
@@ -236,7 +240,7 @@ div.flicking_con{background-color:rgba(255, 255, 255, 0.25);-wekit-background-co
 
 </style>
 </head>
-<body>
+<body class="dragscroll">
 <?php 
 	if (isset($imgArr)&&!empty($imgArr)){
 		echo '<div class="main_visual"><div class="flicking_con">';

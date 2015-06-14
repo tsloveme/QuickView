@@ -4,9 +4,11 @@ if(!isset($_REQUEST['projectName']) || empty($_REQUEST['projectName'])){
     exit;
 }
 $projectNameOrigin = $_REQUEST['projectName'];
-$absDirUtf8 = 'upload/'.$projectNameOrigin.'/';
+$confirm = $_REQUEST['confirm'];
+$dirType = $confirm == '1' ? 'confirm' : 'test';
+$absDirUtf8 = 'upload/'.$dirType.'/'.$projectNameOrigin.'/';
 $projectName = iconv('utf-8','gbk', $projectNameOrigin);
-$absDir = 'upload/'.$projectName.'/';
+$absDir = 'upload/'.$dirType.'/'.$projectName.'/';
 if(!is_dir($absDir)){
     echo '无效参数';
     exit;
@@ -16,9 +18,9 @@ if(!is_dir($absDir)){
 		$type = pathinfo($filename); 
 		$type = strtolower($type["extension"]); 
 		return $type; 
-	}  
+	}	
 	$dir = getcwd();
-    $dir = $dir.'\\upload\\'.$projectName;
+    $dir = $dir.'\\upload\\'.$dirType.'\\'.$projectName;
 	$list = scandir($dir);
 	$imgArr = array();
 	foreach($list as $k => $v){
@@ -61,10 +63,10 @@ body{padding-bottom:40px;}
 .banner .disable{visibility:hidden; position:absolute; left:0; top:0;}
 .banner .im img{position:absolute; top:auto; left:-960px; display:block; vertical-align:top;}
 .main{width:1000px; margin:0 auto;}
-.fixedFoot{width:100%;position:fixed; left:0; bottom:0; background-color:rgba(0,0,0,0.65);text-align:center;}
+.fixedFoot{width:100%;position:fixed; left:0; bottom:0; background-color:black; background-color:rgba(0,0,0,0.8);text-align:center;}
 .FootOverFlow{overflow-x:scroll; overflow-y:hidden;}
 .fixedFoot .inner{padding:1px;}
-.fixedFoot a{display:inline-block; margin:3px; padding:6px 4px; line-height:1; border:1px dashed #e0e0e0;border-radius:3px;font-size:12px; color:#e0e0e0; text-decoration:none}
+.fixedFoot a{display:inline-block; font-weight:bold; margin:3px; padding:6px 4px; line-height:1; border:1px dotted #e0e0e0;border-radius:3px;font-size:12px; color:#e0e0e0; text-decoration:none}
 .fixedFoot a:link{color:#e0e0e0;}
 .fixedFoot a:hover{border-style:dotted; text-decoration:none;}
 .fixedFoot a.selected{border:1px solid #e0e0e0; background-color:#e0e0e0; color:#333;}
