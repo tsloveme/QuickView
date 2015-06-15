@@ -192,11 +192,12 @@ $(function(){
 			var n = $(".flicking_con a").index($(".flicking_con .on"));
 			$(".a_wrap a").removeClass("selected").eq(n).addClass("selected");
 		});
-	
+		$('.main_visual').wrap('<div class="main"></div>');
+		$('.main_visual').css('height','600px');
+		$(window).resize(function(){
+			$('.main_visual').css('height',document.documentElement.clientHeight+'px');
+		});
 	}
-	//
-	//var pc_pannel = $('<div class="pc_pannel"><div class="inner"><h2>页面导航</h2></div></div>');
-	//var pc_pannel = $('<div class="pc_pannel"><div class="inner"><h2>页面导航</h2></div></div>');
 })
 </script>
 <title><?php echo $pageTitle ?></title>
@@ -240,7 +241,8 @@ div.flicking_con a.on{background-position:0 -1em}
 .pc_pannel .a_wrap a:hover{color:#fff; background-color:orange; text-decoration:none}
 .pc_pannel .a_wrap a.selected{background-color:orange;border:1px #ff6000 solid; color:white}
 div.flicking_con{background-color:rgba(255, 255, 255, 0.25);-wekit-background-color:rgba(255, 255, 255, 0.25); padding-top:.5em;}
-
+.main{overflow:hidden;}
+.main .main_inner{width:500px; overflow:hidden; overflow-y:scroll;}
 
 </style>
 </head>
