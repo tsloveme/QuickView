@@ -3,7 +3,7 @@ header('Content-type:text/json;charset=utf-8');
 include('lib/qrcode/qrlib.php');
 $folder = iconv('utf-8', 'GBK', $_POST['folder']);
 $ds = DIRECTORY_SEPARATOR;
-$baseDir = 'upload';
+$baseDir = 'upload'.$ds.'test';
 $targetPath = dirname( __FILE__ ) . $ds. $baseDir . $ds .$folder . $ds;
 //如果目录不存在，创建并初始化index.php
 if (!is_dir($targetPath)){

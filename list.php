@@ -6,6 +6,7 @@ function doAction(){
 		if(isset($_GET['projectName'])){
 			$projectName =$_GET['projectName'];
 		}
+        $projectName = iconv('utf-8','gbk',$projectName);
 		if($action == 'puttest'){
 			//rename($dir.'\\confirm\\'.$projectName,$dir.'\\test\\'.$projectName.'\\');
 			rename('upload/confirm/'.$projectName,'upload/test/'.$projectName);

@@ -5,7 +5,6 @@ if(!isset($_SESSION['username']) || $_SESSION['username']!='admin'){
 	header('Location:login.php?from='.$url);
     exit();
 }
-var_dump($_SESSION);
 ?>
 <!doctype html>
 <html>
@@ -58,7 +57,6 @@ var_dump($_SESSION);
     </table>
     <br/>
 </div>
-<a id="newLink" href="" target="_blank" style="visibility: hidden">link to new object</a>
 <script>
 	/*
 	*目录生成函数
@@ -123,8 +121,7 @@ var_dump($_SESSION);
         queuecomplete: function(){
             console.log("queuecomplete!");
             //触发新项目链接
-            $('#newLink').click();
-
+            alert('上传成功');
         }
     });
     $(".btnSubmit").click(function(){
@@ -146,13 +143,6 @@ var_dump($_SESSION);
             console.log('ok');
             myDropzone.processQueue();
         }
-        //添加新项目链接
-        var url = window.location.href;
-        url = url.replace(/[^\/]*$/,'');
-        url += 'upload/';
-        url += $('#folder').val();
-        url = encodeURI(url);
-        $('#newLink').attr('href',url);
     });
 </script>
 <?php 
