@@ -153,7 +153,11 @@ $(function(){
 		$(".main_image").css("height",maxImgHeight+'px');
 	}
 	//pc端预览模式
+
 	if(!isMobile()){
+        thisurl = window.location.href;
+        thisurl = encodeURIComponent(thisurl);
+        qrUrl = 'mkUrlQr.php?url='+thisurl;
 		$("html").addClass("pc_page");
 		$("body").append('<div class="pc_pannel">\
 							<div class="inner">\
@@ -162,7 +166,7 @@ $(function(){
 								</div>\
 								<div class="clear"></div>\
 								<h2>手机扫描二维码全屏访问</h2>\
-								<div><img src="<?php echo $absDirUtf8 ?>quick_mark_address.png" /></div>\
+								<div><img src="'+qrUrl+'" /></div>\
 							</div>\
 						</div>');
 		<?php
