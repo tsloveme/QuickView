@@ -7,11 +7,11 @@ function doAction(){
 			$projectName =$_GET['projectName'];
 		}
         $projectName = iconv('utf-8','gbk',$projectName);
-		if($action == 'puttest'){
+		if(($action == 'puttest') && (is_dir('upload/confirm/'.$projectName))){
 			//rename($dir.'\\confirm\\'.$projectName,$dir.'\\test\\'.$projectName.'\\');
 			rename('upload/confirm/'.$projectName,'upload/test/'.$projectName);
 		}
-		if($action == 'putconfirm'){
+		if(($action == 'putconfirm') && (is_dir('upload/test/'.$projectName))){
 			//rename($dir.'\\test\\'.$projectName,$dir.'\\confirm\\'.$projectName);
 			rename('upload/test/'.$projectName,'upload/confirm/'.$projectName);
 		}
@@ -39,6 +39,7 @@ td span a{font-size:.75rem; color:red; text-decoration:none;}
 td span a:hover{text-decoration:underline;}
 .test td span a{color:#2C82D8;}
 body{font-size:1rem;font-family:'微软雅黑';}
+#logout{position:fixed; right:5px;bottom:5px; text-align:right;}
 @media screen  and (min-width:359px) and (max-width:414px) {
 	body{font-size:1rem;}
 }
@@ -239,5 +240,17 @@ h1{font-size:1.5rem; line-height:2.4; text-align:center; margin.5rem 0; padding-
 			?>
 		</table>
 	</div>
+    <div id="logout">
+    <?php
+    if(isset($_SESSION['username'])) {
+        echo '<span>' . $_SESSION['username'] . '你好! </span>';
+        echo '<a href="login.php?logout=1">注销</a>';
+    }
+    else{
+        echo '<a href="login.php">登录管理</a>';
+        }
+    ?>
+
+    </div>
 </body>
 </html>

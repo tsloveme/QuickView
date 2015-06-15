@@ -38,7 +38,9 @@ input[type="submit"]{border-radius: 3px; border: 1px #0266c4 solid; background-c
     <td>
         <input type="submit" name="submit" id="submit" onsubmit="return submit()" value="登 录"></td>
   </tr>
-</table></form>
+</table>
+<p style="text-align: center;padding:8px; font-size: .75rem;"><a href="list.php">[查看项目列表]</a></p>
+</form>
 <script>
 	function submit(){
 		if(document.form1.username.value.replace(/(^\s+)|\s+$/g,'')==''){
@@ -64,10 +66,8 @@ if(!isset($_POST) || empty($_POST)){
 $username = preg_replace('/(^\s+)|(\s+$)/','',$_REQUEST['username']);
 $password = preg_replace('/(^\s+)|(\s+$)/','',$_REQUEST['password']);
 if(($username === 'admin') && ($password === 'admin888')){
-	//session_set_cookie_params($lifeTime);
 	session_start();
 	$_SESSION['username'] =$username;
-	//echo '<script>alert("登录成功！")</script>';
 	if($from!=''){
 		header('Location:'.$from);
 	}
