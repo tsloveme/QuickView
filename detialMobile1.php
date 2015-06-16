@@ -149,7 +149,9 @@ $(function(){
         thisurl = window.location.href;
         thisurl = encodeURIComponent(thisurl);
         qrUrl = 'mkUrlQr.php?url='+thisurl;
-		$("body").append('<div class="pc_pannel">\
+		$("body").append('<div class="openList">列表展示</div>\
+						  <div class="pc_pannel" style="width:0px; border-right:;">\
+							<a class="closeList" href="javascript:;">[关闭]</a>\
 							<div class="inner">\
 								<h2>页面导航</h2>\
 								<div class="a_wrap">\
@@ -204,6 +206,16 @@ $(function(){
             //$( this ).css({ top:dd.offsetY });
             $('.main_inner').scrollTop(-(dd.offsetY));
         });
+		//列表展开收缩
+		$('.openList').click(function(){
+			$(this).hide();
+			$('.pc_pannel').animate({width:200});
+		});
+		$('.closeList').click(function(){
+			$('.pc_pannel').animate({width:0},function(){
+				$('.openList').show();
+			});
+		});
 	}
 })
 </script>
@@ -220,6 +232,7 @@ img{border:none}
 ul li{list-style-type:none;}
 ol{}
 /*初始化*/
+html{height:100%;}
 header,footer,.main{margin:0 auto; max-width:480px;}
 header{display:block;width:100%; vertical-align:top;}
 body{max-width:480px; margin:0 auto; height:100%; background-color:#000;font-family: "Microsoft Yahei", Verdana;}
@@ -237,15 +250,16 @@ div.flicking_con a.on{background-position:0 -1em}
 #btn_prev,#btn_next{z-index:11111;position:absolute;display:block;top:50%;margin-top:-37px;display:none;}
 #btn_prev{left:100px;}
 #btn_next{right:100px;}
-.pc_pannel{height:100%; width: 240px; overflow: hidden; overflow-y:scroll; position:fixed; left:0; top:0; background-color:#fff;  scrollbar-face-color: #353535;scrollbar-shadow-color: #565656;scrollbar-highlight-color: #565656;scrollbar-3dlight-color: #7F7F7F;scrollbar-darkshadow-color: #565656;scrollbar-track-color: #565656;scrollbar-arrow-color: #DADADA;}
-.pc_pannel .inner{margin:0 5px; padding:5px 0;}
-.pc_pannel h2{font-size:18px; color:#333; line-height:1.75; padding-top:15px; text-align: center; white-space: nowrap;}
-.pc_pannel table{border-collapse:collapse;}
-.pc_pannel .a_wrap{ padding:5px;}
-.pc_pannel .a_wrap a{ margin:0 0 8px  0; display:block; line-height:1.5; padding:5px; color:#666;border:1px #ccc dotted; border-radius:3px; text-decoration:none; background-color:#fff;white-space:nowrap; text-overflow:ellipsis;overflow:hidden;}
-.pc_pannel .a_wrap a:link{color:#666;}
-.pc_pannel .a_wrap a:hover{color:#fff; background-color:orange; text-decoration:none}
-.pc_pannel .a_wrap a.selected{background-color:orange;border:1px #ff6000 solid; color:white}
+.openList{position:fixed; left:0;top:2px; padding:4px 2px; width:20px; text-align:center; border-radius:0 3px 3px 0; background-color:#ccc; color:#333; cursor:pointer; line-height1.5;}
+.closeList{position:absolute; font-size:12px; color:red; right:5px; top:5px;}
+.pc_pannel{height:100%; width: 200px; overflow: hidden; position:fixed; left:0; top:0;border-right:1px #484848 solid;}
+.pc_pannel .inner{height:100%;}
+.pc_pannel h2{font-size:18px; color:#FFF; line-height:35px; height:35px; padding-top:15px; text-align: center; white-space: nowrap;}
+.pc_pannel .a_wrap{ padding:5px; padding-right:10px; width:205px; height:80%; height:calc( 100% - 60px ); overflow:hidden; overflow-y:scroll;}
+.pc_pannel .a_wrap a{ margin:0 0 8px  0; display:block; line-height:1.25; padding:3px 5px; color:#ccc;border:1px #ccc dotted; border-radius:3px; text-decoration:none;white-space:nowrap; text-overflow:ellipsis;overflow:hidden;}
+.pc_pannel .a_wrap a:link{color:#ccc;}
+.pc_pannel .a_wrap a:hover{color:#333; background-color:#ccc; text-decoration:none}
+.pc_pannel .a_wrap a.selected{background-color:#ccc;border:1px #ccc solid; color:#333;}
 div.flicking_con{background-color:rgba(255, 255, 255, 0.25);-wekit-background-color:rgba(255, 255, 255, 0.25); padding-top:.5em;}
 .main{overflow:hidden;}
 .main .main_inner{width:500px; overflow:hidden; overflow-y:scroll; height: 100%;}
