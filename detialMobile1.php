@@ -56,29 +56,40 @@ header('Content-type:text/html;charset=utf-8');
 <meta name="x5-fullscreen" content="true"/>
 <meta name="x5-page-mode" content="app"/>
 <script src="public/jquery-1.8.3.min.js"></script>
-<script src="public/jquery.event.drag-1.5.min.js"></script>
-<script src="public/jquery.touchSlider.js"></script>
-<script src='public/dragscroll.js'></script>
+<!--<script src="public/jquery.event.drag-1.5.min.js"></script>-->
+<script src="public/loadjs.js"></script>
 <script>
-/*判断是否手机浏览器*/
-function isMobile() {
-	var sUserAgent = navigator.userAgent.toLowerCase();
-	var noneUA =!(navigator.userAgent.toLowerCase());
-	var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-	var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-	var bIsMidp = sUserAgent.match(/midp/i) == "midp";
-	var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-	var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-	var bIsAndroid = sUserAgent.match(/android/i) == "android";
-	var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-	var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
-	if (noneUA || bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM ){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
+
+    //PC端同步加载jquery.drag.js
+    if (!isMobile()){
+        var rootObject=document.getElementsByTagName("head")[0];
+        Skip.addJs(rootObject,"public/jquery.event.drag-2.2.js")
+    }
+
+    /*判断是否手机浏览器*/
+    function isMobile() {
+        var sUserAgent = navigator.userAgent.toLowerCase();
+        var noneUA =!(navigator.userAgent.toLowerCase());
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+        if (noneUA || bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+</script>
+<!--<script src="public/jquery.event.drag-2.2.js"></script>-->
+<script src="public/jquery.touchSlider.js"></script>
+<script>
 $(function(){
 	$dragBln = false;
 	maxImgHeight = 0;
@@ -106,26 +117,6 @@ $(function(){
 			return false;
 		}
 	});
-	
-	/*timer = setInterval(function(){
-		$("#btn_next").click();
-	}, 5000);
-	
-	$(".main_visual").hover(function(){
-		clearInterval(timer);
-	},function(){
-		timer = setInterval(function(){
-			$("#btn_next").click();
-		},5000);
-	});*/
-	
-	/*$(".main_image").bind("touchstart",function(){
-		clearInterval(timer);
-	}).bind("touchend", function(){
-		timer = setInterval(function(){
-			$("#btn_next").click();
-		}, 5000);
-	});*/
 
 	var loadedNum = 0;
 	(function(){
@@ -137,7 +128,7 @@ $(function(){
 				imgs[i].onload =function(){
 					loadedNum++;
 					if	(loadedNum==imgLength){
-						//img加载完成，适配调度
+						//img加载完成，适配高度
 						adaptHeight();
 					}
 				}
@@ -158,17 +149,21 @@ $(function(){
         thisurl = window.location.href;
         thisurl = encodeURIComponent(thisurl);
         qrUrl = 'mkUrlQr.php?url='+thisurl;
-		$("html").addClass("pc_page");
 		$("body").append('<div class="pc_pannel">\
 							<div class="inner">\
 								<h2>页面导航</h2>\
 								<div class="a_wrap">\
 								</div>\
 								<div class="clear"></div>\
-								<h2>手机扫描二维码全屏访问</h2>\
-								<div><img src="'+qrUrl+'" /></div>\
 							</div>\
-						</div>');
+						</div>\
+						<div class="rightTopQr"><img src="public/icon_qr.png" />\
+						<div class="imbox">\
+                        <h2>手机扫描二维码全屏访问</h2>\
+						<img src="'+qrUrl+'" />\
+						<span class="close">&times;</span>\
+						</div></div>\
+						');
 		<?php
 			if (isset($imgArr)&&!empty($imgArr)){
 				$linkBtn ='';
@@ -192,11 +187,23 @@ $(function(){
 			var n = $(".flicking_con a").index($(".flicking_con .on"));
 			$(".a_wrap a").removeClass("selected").eq(n).addClass("selected");
 		});
-		$('.main_visual').wrap('<div class="main"></div>');
-		$('.main_visual').css('height','600px');
+		$('.main_visual').wrap('<div class="main_inner"></div>');
+		$('.main_inner').wrap('<div class="main"></div>');
+		$('.main').css({height:document.documentElement.clientHeight+'px'});
 		$(window).resize(function(){
-			$('.main_visual').css('height',document.documentElement.clientHeight+'px');
+			$('.main').css('height',document.documentElement.clientHeight+'px');
 		});
+        //二维码开关
+        $('.rightTopQr img').eq(0).click(function(){
+            $('.rightTopQr .imbox').show('normal')
+        });
+        $('.rightTopQr .close').click(function(){
+            $('.rightTopQr .imbox').hide('normal');
+        });
+        $('.main_image').drag(function( ev, dd ){
+            //$( this ).css({ top:dd.offsetY });
+            $('.main_inner').scrollTop(-(dd.offsetY));
+        });
 	}
 })
 </script>
@@ -218,7 +225,7 @@ header{display:block;width:100%; vertical-align:top;}
 body{max-width:480px; margin:0 auto; height:100%; background-color:#000;font-family: "Microsoft Yahei", Verdana;}
 /* main_image */
 .main_visual{overflow:hidden;position:relative;}
-.main_image{height:422px;overflow:hidden;position:relative;}
+.main_image{height:422px;overflow:hidden;position:relative; cursor:Move;}
 .main_image ul{width:9999px;overflow:hidden;position:absolute;top:0;left:0}
 .main_image li{float:left;width:100%;}
 .main_image li a{display:block;width:100%;height:422px}
@@ -230,26 +237,29 @@ div.flicking_con a.on{background-position:0 -1em}
 #btn_prev,#btn_next{z-index:11111;position:absolute;display:block;top:50%;margin-top:-37px;display:none;}
 #btn_prev{left:100px;}
 #btn_next{right:100px;}
-.pc_page{padding-left:55%;}
-.pc_pannel{width:55%; height:100%; overflow-y:scroll; position:fixed; left:0; top:0; background-color:#fff}
+.pc_pannel{height:100%; width: 240px; overflow: hidden; overflow-y:scroll; position:fixed; left:0; top:0; background-color:#fff;  scrollbar-face-color: #353535;scrollbar-shadow-color: #565656;scrollbar-highlight-color: #565656;scrollbar-3dlight-color: #7F7F7F;scrollbar-darkshadow-color: #565656;scrollbar-track-color: #565656;scrollbar-arrow-color: #DADADA;}
 .pc_pannel .inner{margin:0 5px; padding:5px 0;}
-.pc_pannel h2{font-size:18px; color:#333; line-height:1.75; padding-top:15px;}
+.pc_pannel h2{font-size:18px; color:#333; line-height:1.75; padding-top:15px; text-align: center; white-space: nowrap;}
 .pc_pannel table{border-collapse:collapse;}
-.pc_pannel .a_wrap{ padding:2px;}
-.pc_pannel .a_wrap a{display:block; line-height:1.5; padding:5px; color:#666;border:1px #ccc dotted; border-radius:3px; text-decoration:none; background-color:#fff;white-space:nowrap; text-overflow:ellipsis;overflow:hidden;}
-.pc_pannel .a_wrap a:link{color:#666; float:left; width:21%; margin:0 2% 8px  0; }
+.pc_pannel .a_wrap{ padding:5px;}
+.pc_pannel .a_wrap a{ margin:0 0 8px  0; display:block; line-height:1.5; padding:5px; color:#666;border:1px #ccc dotted; border-radius:3px; text-decoration:none; background-color:#fff;white-space:nowrap; text-overflow:ellipsis;overflow:hidden;}
+.pc_pannel .a_wrap a:link{color:#666;}
 .pc_pannel .a_wrap a:hover{color:#fff; background-color:orange; text-decoration:none}
 .pc_pannel .a_wrap a.selected{background-color:orange;border:1px #ff6000 solid; color:white}
 div.flicking_con{background-color:rgba(255, 255, 255, 0.25);-wekit-background-color:rgba(255, 255, 255, 0.25); padding-top:.5em;}
 .main{overflow:hidden;}
-.main .main_inner{width:500px; overflow:hidden; overflow-y:scroll;}
-
+.main .main_inner{width:500px; overflow:hidden; overflow-y:scroll; height: 100%;}
+.rightTopQr{position: fixed; text-align: right; right: 2px; top: 2px; display: inline-block;padding:2px; background-color: #fff;}
+.rightTopQr img:first-child{cursor: pointer;}
+.rightTopQr img{vertical-align: top;}
+.rightTopQr .imbox{text-align: center; position: absolute; padding:5px; right: 0; top:0; background-color: #fff; display: none }
+.rightTopQr .imbox .close{background-color:#fff;font-size: 1rem; width: 1.5rem; height: 1.5rem; line-height: 1.5rem; border-radius: 50%; color: #000000; text-align: center; font-weight: bold;position: absolute; cursor: pointer;bottom:-.5rem;left:-.5rem;border:1px #999 solid; box-shadow: 0 0 3px 0 #999;}
 </style>
 </head>
 <body>
 <?php 
 	if (isset($imgArr)&&!empty($imgArr)){
-		echo '<div class="main_visual"><div class="flicking_con">';
+		echo '<div class="main_visual" ><div class="flicking_con">';
 		foreach($imgArr as $key => $value){
 			/*if (count($imgArr)==1){
 				echo '<a href="#">'.($key+1).'</a>';
@@ -275,7 +285,6 @@ div.flicking_con{background-color:rgba(255, 255, 255, 0.25);-wekit-background-co
 			<a href="javascript:;" title="welcome_1080_1920_2">welcome_1080_1920_2222222</a>
 			<a href="javascript:;" title="welcome_1080_1920_3">welcome_1080_1920_333333</a>
 			<a href="javascript:;" title="welcome_1080_1920_4">welcome_1080_1920_444444444444</a>
-			
 			<a href="javascript:;" title="welcome_1080_1920_1">welcome_1080_1920_1</a>
 			<a href="javascript:;" title="welcome_1080_1920_2">welcome_1080_1920_2222222</a>
 			<a href="javascript:;" title="welcome_1080_1920_3">welcome_1080_1920_333333</a>
