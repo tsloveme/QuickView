@@ -8,7 +8,7 @@ $targetPath = dirname( __FILE__ ) . $ds. $baseDir . $ds .$folder . $ds;
 //如果目录不存在，创建并初始化index.php
 if (!is_dir($targetPath)){
     mkdir($targetPath);
-   /* if(!is_file($targetPath . $ds .'index.php')){
+   /* if(!is_file($targetPath . $ds .'admin.php')){
         $type = $_POST['webtype'];
         if($type=='pc'){
             $templateName = 'index_pc.php';
@@ -16,7 +16,7 @@ if (!is_dir($targetPath)){
         else{
             $templateName = 'index_mobile.php';
         }
-        copy(dirname( __FILE__ ) . $ds. 'template' . $ds.$templateName, $targetPath . $ds .'index.php');
+        copy(dirname( __FILE__ ) . $ds. 'template' . $ds.$templateName, $targetPath . $ds .'admin.php');
     }*/
 }
 //如果是手机项目生成二维码在项目根目录
@@ -25,7 +25,7 @@ if (!is_dir($targetPath)){
     $path = $_SERVER['REQUEST_URI'];    // /QuickView/upload.php
     preg_match_all('/(^\/.*\/)/',$path,$match);
     $path =$match[1][0].$baseDir.'/';
-    $url = 'http://'. $host . $path .$_POST['folder'].'/'.'index.php';
+    $url = 'http://'. $host . $path .$_POST['folder'].'/'.'admin.php';
     var_dump($url);
 	//$url = urlencode($url);
     QRcode::png($url, $targetPath.'quick_mark_address.png', QR_ECLEVEL_M, 6);

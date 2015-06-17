@@ -36,10 +36,9 @@ input[type="submit"]{border-radius: 3px; border: 1px #0266c4 solid; background-c
     <tr>
     <td></td>
     <td>
-        <input type="submit" name="submit" id="submit" onsubmit="return submit()" value="登 录"></td>
+        <input type="submit" name="submit" id="submit" onsubmit="return submit()" value="登 录"> <a href="index.php" style="font-size: .75rem;">[查看项目列表]</a></td>
   </tr>
 </table>
-<p style="text-align: center;padding:8px; font-size: .75rem;"><a href="list.php">[查看项目列表]</a></p>
 </form>
 <script>
 	function submit(){
@@ -72,7 +71,7 @@ if(($username === 'admin') && ($password === 'admin888')){
 		header('Location:'.$from);
 	}
 	else{
-		header('Location:index.php');
+		header('Location:admin.php');
 	}
 }
 else{
