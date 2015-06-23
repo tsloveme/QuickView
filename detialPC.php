@@ -4,6 +4,8 @@ if(!isset($_REQUEST['projectName']) || empty($_REQUEST['projectName'])){
     exit;
 }
 $projectNameOrigin = $_REQUEST['projectName'];
+preg_match ('/\d{6}[a-z]*_(.*)_\d{6}/',$projectNameOrigin,$shortName);
+$shortName = $shortName[1];
 $confirm = $_REQUEST['confirm'];
 $dirType = $confirm == '1' ? 'confirm' : 'test';
 $absDirUtf8 = 'upload/'.$dirType.'/'.$projectNameOrigin.'/';
@@ -31,7 +33,7 @@ if(!is_dir($absDir)){
 		}
 	}
 	if (isset($imgArr)&&!empty($imgArr)){
-		$pageTitle = "效果图预览-".$imgArr[0];
+        $pageTitle = $shortName."-效果图预览";
 	}
 	else{
 		$pageTitle = "没有文件，请先添加";	
@@ -56,21 +58,20 @@ img{border:none}
 li{list-style:none;}
 a,a:link{color:#535353; text-decoration:none;}
 a:hover{color:#CCB08A; text-decoration:underline;}
-body{padding-bottom:40px;}
+body{padding-top:40px;}
 /*初始化*/
 .banner{width:100%; overflow:hidden; position:relative; padding-bottom:25px;} 
 .banner .im{width:1px; position:relative; margin:0 auto;}
 .banner .disable{visibility:hidden; position:absolute; left:0; top:0;}
 .banner .im img{position:absolute; top:auto; left:-960px; display:block; vertical-align:top;}
 .main{width:1000px; margin:0 auto;}
-.fixedFoot{width:100%;position:fixed; left:0; bottom:0; background-color:black; background-color:rgba(0,0,0,0.8);text-align:center;}
-.FootOverFlow{overflow-x:scroll; overflow-y:hidden;}
-.fixedFoot .inner{padding:1px;}
-.fixedFoot a{display:inline-block; font-weight:bold; margin:3px; padding:6px 4px; line-height:1; border:1px dotted #e0e0e0;border-radius:3px;font-size:12px; color:#e0e0e0; text-decoration:none}
-.fixedFoot a:link{color:#e0e0e0;}
-.fixedFoot a:hover{border-style:dotted; text-decoration:none;}
-.fixedFoot a.selected{border:1px solid #e0e0e0; background-color:#e0e0e0; color:#333;}
-.fixedFoot a.selected:hover{border-style:solid;}
+.fixedHeader{width:100%;position:fixed; left:0; top:0; background-color:black; background-color:rgba(0,0,0,0.8);text-align:center;}
+.fixedHeader .inner{padding:1px;}
+.fixedHeader a{display:inline-block; font-weight:bold; margin:3px; padding:6px 4px; line-height:1; border:1px dotted #e0e0e0;border-radius:3px;font-size:12px; color:#e0e0e0; text-decoration:none}
+.fixedHeader a:link{color:#e0e0e0;}
+.fixedHeader a:hover{border-style:dotted; text-decoration:none;}
+.fixedHeader a.selected{border:1px solid #e0e0e0; background-color:#e0e0e0; color:#333;}
+.fixedHeader a.selected:hover{border-style:solid;}
 
 </style>
 <script>
@@ -110,7 +111,7 @@ function adaptHeight(obj){
     </div>
 -->    
 </div>
-<div class="fixedFoot">
+<div class="fixedHeader">
 	<div class="inner">
     	<!--<a href="#" class="selected">（维也纳智好酒店）网页设计图</a>
     	<a href="#">1（维纳斯皇家酒店）网页设计图</a>
@@ -144,13 +145,13 @@ $(function(){
 			for (var i in shortArr){
 				str += '<a href="#" title="'+arr[i]+'">'+shortArr[i]+'</a>';	
 			}
-			$(".fixedFoot .inner").append(str);
-			$(".fixedFoot .inner a:first").addClass("selected");
-			$(".fixedFoot .inner a").on("click", function(){
+			$(".fixedHeader .inner").append(str);
+			$(".fixedHeader .inner a:first").addClass("selected");
+			$(".fixedHeader .inner a").on("click", function(){
 				if($(this).hasClass("selected")) return;
 				$(this).siblings().removeClass("selected");
 				$(this).addClass("selected");
-				var n = $(".fixedFoot .inner a").index($(this));
+				var n = $(".fixedHeader .inner a").index($(this));
 				$(".banner .im").hide().eq(n).removeClass("disable").fadeIn();
 			})
 		}()

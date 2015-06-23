@@ -27,6 +27,7 @@ doAction();
 <title>项目列表</title>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <meta name="renderer" content="webkit">
+<link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon" />
 <meta name="viewport" content="width=device-width initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 <style type="text/css">
 *{margin:0; padding:0;}

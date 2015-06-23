@@ -10,6 +10,7 @@ if(isset($_GET['from']) && !empty($_GET['from'])){
 <head>
 <meta charset="utf-8">
 <title>管理员登录</title>
+    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon" />
 </head>
 <style type="text/css">
 td{border:1px #ccc solid;}

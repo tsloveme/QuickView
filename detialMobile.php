@@ -5,6 +5,8 @@ if(!isset($_REQUEST['projectName']) || empty($_REQUEST['projectName'])){
     exit;
 }
 $projectNameOrigin = $_REQUEST['projectName'];
+preg_match ('/\d{6}[a-z]*_(.*)_\d{6}/',$projectNameOrigin,$shortName);
+$shortName = $shortName[1];
 $confirm = $_REQUEST['confirm'];
 $dirType = $confirm == '1' ? 'confirm' : 'test';
 $absDirUtf8 = 'upload/'.$dirType.'/'.$projectNameOrigin.'/';
@@ -32,7 +34,7 @@ foreach($list as $k => $v){
     }
 }
 if (isset($imgArr)&&!empty($imgArr)){
-    $pageTitle = "效果图预览-".$imgArr[0];
+    $pageTitle = $shortName."-效果图预览";
 }
 else{
     $pageTitle = "没有文件，请先添加";
@@ -44,6 +46,7 @@ else{
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <meta name="renderer" content="webkit">
+<link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon" />
 <meta name="viewport" content="width=device-width initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -238,7 +241,7 @@ else{
     body{max-width:480px; margin:0 auto; height:100%; background-color:#000;font-family: "Microsoft Yahei", Verdana;}
     /* main_image */
     .main_visual{overflow:hidden;position:relative;}
-    .main_image{height:422px;overflow:hidden;position:relative; cursor:Move;}
+    .main_image{height:422px;overflow:hidden;position:relative; cursor: url(http://webmap0.map.bdstatic.com/image/api/openhand.cur) 8 8, default;}
     .main_image ul{width:9999px;overflow:hidden;position:absolute;top:0;left:0}
     .main_image li{float:left;width:100%;}
     .main_image li a{display:block;width:100%;height:422px}
@@ -298,35 +301,20 @@ else{
 			<a href="javascript:;" title="welcome_1080_1920_1">welcome_1080_1920_1</a>
 			<a href="javascript:;" title="welcome_1080_1920_2">welcome_1080_1920_2222222</a>
 			<a href="javascript:;" title="welcome_1080_1920_3">welcome_1080_1920_333333</a>
-			<a href="javascript:;" title="welcome_1080_1920_4">welcome_1080_1920_444444444444</a>
-			<a href="javascript:;" title="welcome_1080_1920_1">welcome_1080_1920_1</a>
-			<a href="javascript:;" title="welcome_1080_1920_2">welcome_1080_1920_2222222</a>
-			<a href="javascript:;" title="welcome_1080_1920_3">welcome_1080_1920_333333</a>
-			<a href="javascript:;" title="welcome_1080_1920_4">welcome_1080_1920_444444444444</a>
-
 			</div
 	></div>
 </div>-->
-
 <!--<div class="main_visual">
 	<div class="flicking_con">
 		<a href="#">1</a>
 		<a href="#">2</a>
 		<a href="#">3</a>
-		<a href="#">4</a>
-		<a href="#">5</a>
-		<a href="#">6</a>
-		<a href="#">7</a>
 	</div>
 	<div class="main_image">
 		<ul>
 			<li><span><img src="welcome_1080_1920_1.jpg" /></span></li>
 			<li><span><img src="welcome_1080_1920_2.jpg" /></span></li>
 			<li><span><img src="welcome_1080_1920_3.jpg" /></span></li>
-			<li><span><img src="welcome_1080_1920_4.jpg" /></span></li>
-			<li><span><img src="welcome_1080_1920_5.jpg" /></span></li>
-			<li><span><img src="welcome_1080_1920_最后.jpg" /></span></li>
-			<li><span><img src="APP移动端（ 邂逅英伦爱情520）.jpg" /></span></li>
 		</ul>
 		<a href="#" id="btn_prev"></a>
 		<a href="#" id="btn_next"></a>

@@ -12,6 +12,7 @@ if(!isset($_SESSION['username']) || $_SESSION['username']!='admin'){
 <meta charset="utf-8">
 <title>效果图上传预览</title>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon" />
 <meta name="renderer" content="webkit">
 <link rel="stylesheet" type="text/css" href="public/basic.css" />
 <link rel="stylesheet" type="text/css" href="public/dropzone.css" />
