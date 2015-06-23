@@ -205,6 +205,7 @@ else{
             $('.rightTopQr .close').click(function(){
                 $('.rightTopQr .imbox').hide('normal');
             });
+			//拖动滚屏
             $('.main_image').drag(function( ev, dd ){
                 //$( this ).css({ top:dd.offsetY });
                 $('.main_inner').scrollTop(-(dd.offsetY));
