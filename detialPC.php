@@ -60,7 +60,7 @@ a,a:link{color:#535353; text-decoration:none;}
 a:hover{color:#CCB08A; text-decoration:underline;}
 body{padding-top:40px;}
 /*初始化*/
-.banner{width:100%; overflow:hidden; position:relative; padding-bottom:25px;} 
+.banner{width:100%; overflow:hidden; position:relative; padding-bottom:25px;cursor: url(http://webmap0.map.bdstatic.com/image/api/openhand.cur) 8 8, default;}
 .banner .im{width:1px; position:relative; margin:0 auto;}
 .banner .disable{visibility:hidden; position:absolute; left:0; top:0;}
 .banner .im img{position:absolute; top:auto; left:-960px; display:block; vertical-align:top;}
@@ -119,20 +119,20 @@ function adaptHeight(obj){
     </div>
 -->    
 </div>
-<div class="fixedHeader">
+<!--<div class="fixedHeader">
 	<div class="inner">
-    	<!--<a href="#" class="selected">（维也纳智好酒店）网页设计图</a>
+    	<a href="#" class="selected">（维也纳智好酒店）网页设计图</a>
     	<a href="#">1（维纳斯皇家酒店）网页设计图</a>
-    	<a href="#">1b网页图（集团介绍）</a>-->
+    	<a href="#">1b网页图（集团介绍）</a>
     </div>
-</div>
+</div>-->
 <script language="javascript" type="text/javascript" src="public/jquery-1.8.3.min.js"></script>
 <script language="javascript" type="text/javascript" src="public/jquery.event.drag-2.2.js"></script>
 
 <script language="javascript" type="text/javascript">
 $(function(){
 	//拖动滚屏
-	$('.drag').live('drag', function( ev, dd ){
+	$('.banner').live('drag', function( ev, dd ){
 		$(document).scrollTop($(document).scrollTop() - (dd.offsetY));
 	});
 	//图片标题收集，过长图片名简称提取;
@@ -156,12 +156,17 @@ $(function(){
 	//导航按钮生成
 	if($(".banner img").length >= 2){
 		!function(){
-			var btnStr = '<div class="drag"></div><div class="btnWrap"><a href="javascript:;" class="btn_prev"></a></div><div class="btnWrap WR"><a href="javascript:;" class="btn_next"></a></div>'
-			$('body').append(btnStr);
+			var btnStr = '<div class="btnWrap"><a href="#" class="btn_prev"></a></div><div class="btnWrap WR"><a href="#" class="btn_next"></a></div>'
+            $('body').append('<div class="fixedHeader">\
+                                <div class="inner">\
+                                </div>\
+                             </div>');
+            $('body').append(btnStr);
 			var str ="";
 			for (var i in shortArr){
 				str += '<a href="#" title="'+arr[i]+'">'+shortArr[i]+'</a>';	
 			}
+
 			$(".fixedHeader .inner").append(str);
 			$(".fixedHeader .inner a:first").addClass("selected");
 			$(".fixedHeader .inner a").on("click", function(){

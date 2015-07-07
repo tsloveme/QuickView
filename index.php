@@ -186,6 +186,7 @@ h1{font-size:1.5rem; line-height:2.4; text-align:center; margin.5rem 0; padding-
 				echo '</tbody>';
 			?>
 		</table>
+        <div style="opacity: 0.45">
 		<h1>项目列表(测试中)</h1>
 		<table border="0" cellspacing="0" cellspadding="0" width="100%" class="test">
 			<tr>
@@ -240,11 +241,13 @@ h1{font-size:1.5rem; line-height:2.4; text-align:center; margin.5rem 0; padding-
 				}
 			?>
 		</table>
+        </div>
 	</div>
     <div id="logout">
     <?php
     if(isset($_SESSION['username'])) {
         echo '<span>' . $_SESSION['username'] . '你好! </span>';
+        echo '<a href="admin.php">[上传项目]</a> ';
         echo '<a href="login.php?logout=1">注销</a>';
     }
     else{
