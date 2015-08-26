@@ -160,9 +160,9 @@ h1{font-size:1.5rem; line-height:2.4; text-align:center; margin.5rem 0; padding-
 						$time = date('m月d日 H:i:s',$pc[0]);
 						$operation = '';
 						if(isset($session_name)){
-							$operation = ' <a href="index.php?action=puttest&projectName='.$pc[1].'" title="放回测试文件夹">[放回测试]</a>';
+							$operation = ' <a href="index.php?action=puttest&projectName='.urlencode($pc[1]).'" title="放回测试文件夹">[放回测试]</a>';
 						}
-						echo '<a href="detialPC.php?confirm=1&projectName='.$pc[1].'">'.$pc[2].'</a><span>'.$time.$operation.'</span>';
+						echo '<a href="detialPC.php?confirm=1&projectName='.urlencode($pc[1]).'">'.$pc[2].'</a><span>'.$time.$operation.'</span>';
 					}
 					else{
 						echo '';
@@ -173,9 +173,9 @@ h1{font-size:1.5rem; line-height:2.4; text-align:center; margin.5rem 0; padding-
 						$time = date('m月d日 H:i:s',$mb[0]);
 						$operation = '';
 						if(isset($session_name)){
-							$operation = ' <a href="index.php?action=puttest&projectName='.$mb[1].'" title="放回测试文件夹">[放回测试]</a>';
+							$operation = ' <a href="index.php?action=puttest&projectName='.urlencode($mb[1]).'" title="放回测试文件夹">[放回测试]</a>';
 						}
-						echo '<a href="detialMobile.php?confirm=1&projectName='.$mb[1].'">'.$mb[2].'</a><span>'.$time.$operation.'</span>';
+						echo '<a href="detialMobile.php?confirm=1&projectName='.urlencode($mb[1]).'">'.$mb[2].'</a><span>'.$time.$operation.'</span>';
 					}
 					else{
 						echo '';
@@ -217,9 +217,9 @@ h1{font-size:1.5rem; line-height:2.4; text-align:center; margin.5rem 0; padding-
 						$time = date('m月d日 H:i:s',$pc[0]);
 						$operation = '';
 						if(isset($session_name)){
-							$operation = ' <a href="index.php?action=putconfirm&projectName='.$pc[1].'" title="放入已确认文件夹">[标记为确认]</a>';
+							$operation = ' <a href="index.php?action=putconfirm&projectName='.urlencode($pc[1]).'" title="放入已确认文件夹">[标记为确认]</a>';
 						}
-						echo '<a href="detialPC.php?confirm=0&projectName='.$pc[1].'">'.$pc[2].'</a><span>'.$time.$operation.'</span>';
+						echo '<a href="detialPC.php?confirm=0&projectName='.urlencode($pc[1]).'">'.$pc[2].'</a><span>'.$time.$operation.'</span>';
 					}
 					else{
 						echo '';
@@ -230,9 +230,9 @@ h1{font-size:1.5rem; line-height:2.4; text-align:center; margin.5rem 0; padding-
 						$time = date('m月d日 H:i:s',$mb[0]);
 						$operation = '';
 						if(isset($session_name)){
-							$operation = ' <a href="index.php?action=putconfirm&projectName='.$mb[1].'" title="放入已确认文件夹">[标记为确认]</a>';
+							$operation = ' <a href="index.php?action=putconfirm&projectName='.urlencode($mb[1]).'" title="放入已确认文件夹">[标记为确认]</a>';
 						}
-						echo '<a href="detialMobile.php?confirm=0&projectName='.$mb[1].'">'.$mb[2].'</a><span>'.$time.$operation.'</span>';
+						echo '<a href="detialMobile.php?confirm=0&projectName='.urlencode($mb[1]).'">'.$mb[2].'</a><span>'.$time.$operation.'</span>';
 					}
 					else{
 						echo '';
