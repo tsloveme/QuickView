@@ -9,6 +9,6 @@
 
 * 系统没有数据库，以目录名作为项目名，系统会自动生成时间戳为唯一标识的前前后辍，所以不用担心会重名。上传文件是创建目录，原名无压缩上传图片的过程，所以，请选排序。给图片命名，以满足图片排序显示要求。
 
-* upload 文件夹有很多图片，我没同步到github,请自行创建(和index.php同级)，  upload 文件夹下还有 test 和 confirm 是分类， 请自行创建。
+* **upload 文件夹**有很多图片，我没同步到github,**请自行创建**(和index.php同级)，  upload 文件夹下还有 test 和 confirm 是分类， 请自行创建。
 
 * 在线DEMO: [http://uinote.cn/done/quickView/](http://uinote.cn/done/quickView/)    (图片多、大，建议用局域网内的电脑做服务器) 。
